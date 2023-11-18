@@ -40,11 +40,25 @@ ngOnInit(): void{
       const confirmPassword = this.signupForm.get('confirmPassword')?.value;
 
       if(password !== confirmPassword){
-        alert('Passwords do not match')
+        alert('Passwords do not match.')
         return;
       }
 
+      this.authService.register(this.signupForm.value).subscribe({
+        next:res =>{
+          if(res.result == 1){
+            sessionStorage.setItem("emailAtive",email);
+            alert('Sign up successful!.')
+            this.router.navigateByUrl("/active-code")
+          }else{
+            alert("email is exists")
+          }
 
+        },
+        error:err =>{
+          alert('Sign up faild. Please try again.')
+        }
+      })
 
     }
 
