@@ -43,6 +43,7 @@ togglePasswordVisibility(){
           this.authService.login(email, password).subscribe({
             next: res =>{
 
+              alert("you login in successfully")
                if(StorageService.isAdminLoggedIn()){
                   this.router.navigateByUrl("/admin/dashboard")
                 }
