@@ -11,7 +11,11 @@ const routes: Routes = [
   {path:'reset', component:ResetPasswordComponent},
   { path:'active-code', component:CodeActivationComponent, canActivate:[accountGuard]},
   {path:'register', component:SignupComponent, canActivate:[loginGuard]},
-  {path:'login', component:LoginComponent, canActivate:[loginGuard]}
+  {path:'login', component:LoginComponent, canActivate:[loginGuard]},
+
+  {path:'admin', loadChildren: () => import("./modules/admin/admin.module").then(m => m.AdminModule)},
+  {path:'customer', loadChildren: () => import("./modules/customer/customer.module").then(m => m.CustomerModule)}
+
 ];
 
 @NgModule({
