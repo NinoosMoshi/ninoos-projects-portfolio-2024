@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,15 @@ public class AdminProductController {
     public ResponseEntity<List<ProductDTO>> getAllProductsByName(@PathVariable String name){
         List<ProductDTO> allProducts = adminProductService.getAllProductsByName(name);
         return ResponseEntity.ok(allProducts);
+    }
+
+    @DeleteMapping("/product/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId){
+        boolean deleted = adminProductService.deleteProduct(productId);
+        if (deleted){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 

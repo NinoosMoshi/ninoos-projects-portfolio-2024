@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,14 +9,18 @@ import { AdminService } from '../../services/admin.service';
 })
 export class AdminDashboardComponent {
 
-  products:any = [];
+  products:any[] = [];
+  searchProductForm!:FormGroup
 
 
-  constructor(private adminService: AdminService){}
+  constructor(private adminService: AdminService,private fb:FormBuilder){}
 
 
   ngOnInit():void{
     this.getAllProducts();
+    this.searchProductForm = this.fb.group({
+      title:[null, [Validators.required]]
+      })
   }
 
 
@@ -28,6 +33,30 @@ export class AdminDashboardComponent {
       });
     })
   }
+
+
+
+
+  submitForm(){
+    const title = this.searchProductForm.get('title')?.value;
+    this.products = [];
+    this.adminService.getAllProductsByName(title).subscribe(res =>{
+      res.forEach(element => {
+        element.processedImg = 'data:image/jpeg;base64,' + element.byteImg;
+        this.products.push(element);
+      });
+    })
+  }
+
+
+
+  deleteProduct(productId:number){
+     this.adminService.deleteProduct(productId).subscribe(res =>{
+        console.log(res)
+        this.getAllProducts();
+     })
+  }
+
 
 
 

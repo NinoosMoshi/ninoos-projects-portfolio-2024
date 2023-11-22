@@ -40,6 +40,19 @@ export class AdminService {
   }
 
 
+  getAllProductsByName(name:string):Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/products/search/${name}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+  deleteProduct(productId:number):Observable<any>{
+    return this.http.delete(`${this.BASIC_URL}/product/${productId}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+
 
 
   private createAuthorizationHeader(): HttpHeaders {
