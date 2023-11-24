@@ -3,6 +3,7 @@ package com.ninos.service.auth;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -27,8 +28,11 @@ import com.ninos.model.dto.NewPassword;
 import com.ninos.model.dto.RegisterDTO;
 import com.ninos.model.dto.UserActive;
 import com.ninos.model.entity.Code;
+import com.ninos.model.entity.Order;
 import com.ninos.model.entity.Role;
 import com.ninos.model.entity.User;
+import com.ninos.model.enums.OrderStatus;
+import com.ninos.repository.OrderRepository;
 import com.ninos.repository.RoleRepository;
 import com.ninos.repository.UserRepository;
 
@@ -48,6 +52,9 @@ public class AuthServiceImpl implements AuthService{
     private final JwtTokenProvider jwtTokenProvider;
 
     private final EmailService emailService;
+
+
+    private final OrderRepository orderRepository;
 
 
 
@@ -82,9 +89,19 @@ public class AuthServiceImpl implements AuthService{
         Code code = new Code();
         code.setCode(myCode);
         user.setCode(code);
-        userRepository.save(user);
+        User CreatedUser = userRepository.save(user);
+
 
         accountResponse.setResult(1);
+
+
+        Order order = new Order();
+        order.setAmount(0L);
+        order.setTotalAmount(0L);
+        order.setDiscount(0L);
+        order.setUser(CreatedUser);
+        order.setOrderStatus(OrderStatus.Pending);
+        orderRepository.save(order);
 
         return accountResponse;
     }

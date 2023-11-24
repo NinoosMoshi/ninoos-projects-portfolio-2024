@@ -30,7 +30,7 @@ public class Product {
     private Long id;
 
     private String name;
-    private BigDecimal price;
+    private Long price;
 
     @Lob
     private String description;
