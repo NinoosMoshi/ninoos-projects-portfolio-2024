@@ -27,6 +27,21 @@ export class CustomerService {
   }
 
 
+  getAllProductByCategory(categoryId:number):Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/${categoryId}/products`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+
+
+  getAllProductsByCategoryIdAndTitle(categoryId:number, name:string):Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/${categoryId}/product/${name}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+
 
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(

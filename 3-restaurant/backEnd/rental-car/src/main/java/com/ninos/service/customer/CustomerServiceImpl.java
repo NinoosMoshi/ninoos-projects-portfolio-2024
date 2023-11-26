@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.ninos.model.dto.CategoryDTO;
+import com.ninos.model.dto.ProductDTO;
 import com.ninos.model.entity.Category;
+import com.ninos.model.entity.Product;
 import com.ninos.repository.CategoryRepository;
 import com.ninos.repository.ProductRepository;
 
@@ -32,6 +34,19 @@ public class CustomerServiceImpl implements CustomerService{
         List<Category> categories = categoryRepository.findAllByNameContaining(name);
         return categories.stream().map(Category::getDto).collect(Collectors.toList());
     }
+
+
+    @Override
+    public List<ProductDTO> getAllProductsByCategory(Long categoryId) {
+        return productRepository.findAllByCategoryId(categoryId).stream().map(Product::getProductDto).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<ProductDTO> getProductsByCategoryIdAndName(Long categoryId, String title) {
+        return productRepository.findAllByCategoryIdAndNameContaining(categoryId,title).stream().map(Product::getProductDto).collect(Collectors.toList());
+    }
+
 
 
 }
