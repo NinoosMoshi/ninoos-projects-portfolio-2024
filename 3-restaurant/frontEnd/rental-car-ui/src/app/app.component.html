@@ -1,7 +1,7 @@
 
 <div *ngIf="!isCustomerLoggedIn && !isAdminLoggedIn">
   <mat-toolbar color="primary" class="navbar">
-    <span class="navbar-brand">Rental Car Service</span>
+    <span class="navbar-brand">Restaurant System</span>
     <span class="spacer"></span>
     <button mat-button routerLink="/register" routerLinkActive="active">Sign up</button>
     <button mat-button routerLink="/login" routerLinkActive="active">Login</button>
@@ -10,7 +10,7 @@
 
 <div *ngIf="isAdminLoggedIn">
   <mat-toolbar color="primary" class="navbar">
-    <span class="navbar-brand">E-Commerce</span>
+    <span class="navbar-brand" routerLink="/admin/dashboard">Restaurant System</span>
     <span class="spacer"></span>
     <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</button>
     <button mat-button routerLink="/admin/category" routerLinkActive="active">Category</button>
@@ -20,7 +20,7 @@
 
 <div *ngIf="isCustomerLoggedIn">
   <mat-toolbar color="primary" class="navbar">
-    <span class="navbar-brand">E-Commerce</span>
+    <span class="navbar-brand">Restaurant System</span>
     <span class="spacer"></span>
     <button mat-button routerLink="/customer/dashboard" routerLinkActive="active">Dashboard</button>
     <button mat-button  routerLinkActive="active" (click)="logout()">Logout</button>

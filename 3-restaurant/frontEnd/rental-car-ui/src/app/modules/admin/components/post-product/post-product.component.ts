@@ -1,47 +1,47 @@
 import { Component } from '@angular/core';
+import { AdminService } from '../../services/admin.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { AdminService } from '../../services/admin.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-category',
-  templateUrl: './add-category.component.html',
-  styleUrls: ['./add-category.component.css']
+  selector: 'app-post-product',
+  templateUrl: './post-product.component.html',
+  styleUrls: ['./post-product.component.css']
 })
-export class AddCategoryComponent {
+export class PostProductComponent {
 
-  categoryForm!:FormGroup;
+  categoryId:number = this.activatedRoute.snapshot.params['categoryId'];
+  productForm!:FormGroup;
   selectedFile: File | null;
   imagePreview: string | ArrayBuffer | null;
+
 
   constructor(private fb:FormBuilder,
     private snackBar: MatSnackBar,
     private adminService: AdminService,
-    private router: Router){}
+    private router: Router,
+    private activatedRoute:ActivatedRoute){}
 
   ngOnInit(){
-    this.categoryForm = this.fb.group({
+    this.productForm = this.fb.group({
       name:[null, Validators.required],
+      price:[null, Validators.required],
       description:[null, Validators.required]
     })
-
   }
 
 
-
-  addCategory(): void{
-    if(this.categoryForm.valid){
+  addProduct(): void{
+    if(this.productForm.valid){
       const formData:FormData = new FormData();
       formData.append('img', this.selectedFile);
-      formData.append('name', this.categoryForm.get('name').value);
-      formData.append('description', this.categoryForm.get('description').value);
+      formData.append('name', this.productForm.get('name').value);
+      formData.append('price', this.productForm.get('price').value);
+      formData.append('description', this.productForm.get('description').value);
 
-
-
-      this.adminService.addCategory(formData).subscribe({
+      this.adminService.postProduct(this.categoryId,formData).subscribe({
         next:res =>{
-
           if(res.id != null){
             this.snackBar.open('Product Posted Successfully', 'Close', {duration:5000});
             this.router.navigateByUrl("/admin/dashboard");
@@ -56,9 +56,9 @@ export class AddCategoryComponent {
 
     }
     else{
-      for(const i in this.categoryForm.controls){
-        this.categoryForm.controls[i].markAsDirty();
-        this.categoryForm.controls[i].updateValueAndValidity();
+      for(const i in this.productForm.controls){
+        this.productForm.controls[i].markAsDirty();
+        this.productForm.controls[i].updateValueAndValidity();
 
       }
     }
@@ -80,6 +80,7 @@ export class AddCategoryComponent {
     }
     reader.readAsDataURL(this.selectedFile);
   }
+
 
 
 

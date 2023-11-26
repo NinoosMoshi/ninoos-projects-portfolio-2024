@@ -1,1 +1,39 @@
-<p>admin-dashboard works!</p>
+
+
+<form [formGroup]="searchCategoryForm" (submit)="SearchCategory()" class="search-form">
+  <mat-form-field appearance="outline" class="search-input">
+     <mat-label>Enter Keyword to search</mat-label>
+     <input matInput formControlName="title" />
+
+     <button mat-button matSuffix color="primary" [disabled]="searchCategoryForm.invalid">
+       <mat-icon>search</mat-icon>
+     </button>
+  </mat-form-field>
+</form>
+
+<div class="product-list">
+
+  <mat-card class="product-card" *ngFor="let temp of categories">
+     <div class="product-image">
+        <img [src]="temp.processedImg" alt="product-image">
+     </div>
+     <div class="product-details">
+        <h2 class="product-name">{{ temp.name }}</h2>
+        <p class="product-description">{{ temp.description }}</p>
+
+        <mat-divider></mat-divider>
+
+        <div class="actions">
+           <button mat-raised-button color="primary" class="update-button"
+           routerLink="/admin/{{temp.id}}/products">View Products</button>
+
+           <button mat-raised-button color="primary" class="update-button"
+              routerLink="/admin/{{temp.id}}/product">Post Product
+           </button>
+
+        </div>
+
+     </div>
+  </mat-card>
+</div>
+

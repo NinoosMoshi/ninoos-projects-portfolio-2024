@@ -7,12 +7,16 @@ import { DemoAngularMaterialModules } from 'src/app/DemoAngularMaterialModules';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PostProductComponent } from './components/post-product/post-product.component';
+import { ViewProductsComponent } from './components/view-products/view-products.component';
 
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    PostProductComponent,
+    ViewProductsComponent
   ],
   imports: [
     CommonModule,

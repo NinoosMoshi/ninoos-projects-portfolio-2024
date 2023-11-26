@@ -12,7 +12,7 @@ public class CategoryDTO {
     private String name;
     private String description;
 
-    private byte[] byteImg;
-    private MultipartFile img;
+    private MultipartFile img;  // to save image
+    private byte[] byteImg;     // to retrieve image
 
 }

@@ -35,6 +35,7 @@ public class Category {
         categoryDTO.setId(id);
         categoryDTO.setName(name);
         categoryDTO.setDescription(description);
+        categoryDTO.setByteImg(img);
         return categoryDTO;
     }
 
