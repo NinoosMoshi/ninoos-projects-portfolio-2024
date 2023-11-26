@@ -79,4 +79,41 @@ public class AdminServiceImpl implements AdminService {
     }
 
 
+    @Override
+    public void deleteProduct(Long productId) {
+        Optional<Product> product = productRepository.findById(productId);
+        if (product.isEmpty()){
+            throw new IllegalArgumentException("product with id: " + productId + "not found");
+        }
+        productRepository.deleteById(productId);
+
+    }
+
+    @Override
+    public ProductDTO updateProduct(Long productId, ProductDTO productDTO) throws IOException {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if(optionalProduct.isPresent()){
+            Product product = optionalProduct.get();
+            product.setName(productDTO.getName());
+            product.setPrice(productDTO.getPrice());
+            product.setDescription(productDTO.getDescription());
+
+            if(productDTO.getImg() != null){
+               product.setImg(productDTO.getImg().getBytes());
+            }
+            Product updatedProduct = productRepository.save(product);
+            ProductDTO updatedProductDto = new ProductDTO();
+            updatedProductDto.setId(updatedProduct.getId());
+            return updatedProductDto;
+        }
+        return null;
+    }
+
+    @Override
+    public ProductDTO getProduct(Long productId) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        return optionalProduct.map(Product::getProductDto).orElse(null);
+    }
+
+
 }

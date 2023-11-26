@@ -49,8 +49,14 @@ export class ViewProductsComponent {
         this.products.push(element);
       });
     })
-
   }
+
+
+  deleteProduct(productId:number){
+    this.adminService.deleteProduct(productId).subscribe(res =>{
+       this.getAllProducts();
+    })
+ }
 
 
 

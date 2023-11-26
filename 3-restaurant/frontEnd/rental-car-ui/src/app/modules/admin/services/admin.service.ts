@@ -57,6 +57,25 @@ export class AdminService {
   }
 
 
+  deleteProduct(productId:number):Observable<any>{
+    return this.http.delete(`${this.BASIC_URL}/product/${productId}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+
+  getProductById(productId:number):Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/product/${productId}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+
+  updateProduct(productId:number, productDTO:any):Observable<any>{
+    return this.http.put(`${this.BASIC_URL}/product/${productId}`, productDTO, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
 
 
 
