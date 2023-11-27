@@ -7,9 +7,13 @@ import { ResetPasswordComponent } from './auth/components/reset-password/reset-p
 
 const routes: Routes = [
   {path:'reset', component:ResetPasswordComponent},
- { path:'active-code', component:CodeActivationComponent},
+  { path:'active-code', component:CodeActivationComponent},
   {path:'register', component:SignupComponent},
-  {path:'login', component:LoginComponent}
+  {path:'login', component:LoginComponent},
+
+  {path:'admin', loadChildren: () => import("./modules/admin/admin.module").then(m => m.AdminModule)},
+  {path:'customer', loadChildren: () => import("./modules/customer/customer.module").then(m => m.CustomerModule)}
+
 ];
 
 @NgModule({
