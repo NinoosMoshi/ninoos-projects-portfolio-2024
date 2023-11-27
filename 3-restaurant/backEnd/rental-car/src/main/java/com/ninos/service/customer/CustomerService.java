@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ninos.model.dto.CategoryDTO;
 import com.ninos.model.dto.ProductDTO;
+import com.ninos.model.dto.ReservationDTO;
 
 public interface CustomerService {
 
@@ -15,4 +16,7 @@ public interface CustomerService {
 
     List<ProductDTO> getProductsByCategoryIdAndName(Long categoryId, String title);
 
+    ReservationDTO postReservation(ReservationDTO reservationDTO);
+
+    List<ReservationDTO> getReservationByUser(Long customerId);
 }

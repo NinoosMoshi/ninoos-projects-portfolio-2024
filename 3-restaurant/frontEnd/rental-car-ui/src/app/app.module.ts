@@ -11,6 +11,12 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
 import { CodeActivationComponent } from './auth/components/code-activation/code-activation.component';
 import { ResetPasswordComponent } from './auth/components/reset-password/reset-password.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+
+
+// note: npm install ngx-material-timepicker --save    for time picker
+
+
 
 @NgModule({
   declarations: [
@@ -27,7 +33,8 @@ import { ResetPasswordComponent } from './auth/components/reset-password/reset-p
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DemoAngularMaterialModules
+    DemoAngularMaterialModules,
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

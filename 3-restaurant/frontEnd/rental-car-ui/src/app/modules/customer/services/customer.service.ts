@@ -41,6 +41,20 @@ export class CustomerService {
     })
   }
 
+  postReservation(reservationDTO:any):Observable<any>{
+    reservationDTO.customerId = StorageService.getUserId();
+    return this.http.post(`${this.BASIC_URL}/reservation`, reservationDTO, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+
+  getReservationsByUser():Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/reservations/${StorageService.getUserId()}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
 
 
   private createAuthorizationHeader(): HttpHeaders {
@@ -48,6 +62,9 @@ export class CustomerService {
      'Authorization', 'Bearer ' + StorageService.getToken()
     )
   }
+
+
+
 
 
 }

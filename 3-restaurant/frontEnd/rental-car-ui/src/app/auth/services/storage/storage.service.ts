@@ -33,12 +33,12 @@ export class StorageService {
 
 
   static getUserId(): string{
-     const user = this.getUser();
-     if(user == null){
-       return '';
-     }
-     return user.userId;
-  }
+    const user = this.getUser();
+    if(user == null){
+      return '';
+    }
+    return user.id;
+ }
 
 
   static getUserRole(): string{

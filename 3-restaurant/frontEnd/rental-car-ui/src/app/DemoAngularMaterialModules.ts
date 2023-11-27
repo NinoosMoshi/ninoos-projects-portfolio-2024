@@ -14,9 +14,13 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatCommonModule} from '@angular/material/core';
+import {MatCommonModule, MatNativeDateModule} from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+
 
 
 @NgModule({
@@ -38,7 +42,12 @@ import {MatTableModule} from '@angular/material/table';
     MatDatepickerModule,
     MatCommonModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatNativeDateModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMaterialTimepickerModule
+
   ]
 })
 

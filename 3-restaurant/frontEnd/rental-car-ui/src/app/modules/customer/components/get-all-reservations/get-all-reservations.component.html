@@ -1,0 +1,29 @@
+<div class="container mt-5">
+   <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Table Type</th>
+            <th>Description</th>
+            <th>Reservation Date</th>
+            <th>Reservation Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let temp of reservations">
+            <td>{{temp.tableType}}</td>
+            <td>{{temp.description}}</td>
+            <td>{{temp.dateTime | date}}</td>
+            <td>{{temp.timePicker}}</td>
+            <td>
+              <strong
+                [ngStyle]="{'color': temp.reservationStatus === 'APPROVED' ? 'green': temp.reservationStatus === 'DISAPPROVED'? 'blue' : 'red'}">
+                {{temp.reservationStatus}}
+              </strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   </div>
+</div>

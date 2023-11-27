@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ninos.model.dto.CategoryDTO;
 import com.ninos.model.dto.ProductDTO;
+import com.ninos.model.dto.ReservationDTO;
 import com.ninos.service.customer.CustomerService;
 
 @RequiredArgsConstructor
@@ -53,5 +55,22 @@ public class CustomerController {
         List<ProductDTO> allProducts = customerService.getProductsByCategoryIdAndName(categoryId,title);
         return ResponseEntity.ok(allProducts);
     }
+
+
+    @PostMapping("/reservation")
+    public ResponseEntity<?> postReservation(@RequestBody ReservationDTO reservationDTO) throws IOException {
+        ReservationDTO postedReservationDto = customerService.postReservation(reservationDTO);
+        if(postedReservationDto == null) return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.CREATED).body(postedReservationDto);
+    }
+
+
+    @GetMapping("/reservations/{customerId}")
+    public ResponseEntity<List<ReservationDTO>> getReservationsByUser(@PathVariable Long customerId){
+        List<ReservationDTO> reservationDTOList = customerService.getReservationByUser(customerId);
+        if(reservationDTOList == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(reservationDTOList);
+    }
+
 
 }

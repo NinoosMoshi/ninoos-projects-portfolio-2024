@@ -1,0 +1,61 @@
+<div class="container">
+  <h2>Reservation Request</h2>
+
+  <form [formGroup]="reservationForm" (ngSubmit)="postReservation()">
+
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Select a Table Type</mat-label>
+      <mat-select formControlName="tableType" name="tableType">
+        <mat-option *ngFor="let table of TableType" [value]="table">{{table}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="reservationForm.get('tableType')?.hasError('required')">
+         Table Type is required
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field color="accent">
+      <mat-label>MM/DD/YYYY</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="dateTime">
+      <mat-datepicker-toggle  matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      <mat-error *ngIf="reservationForm.get('dateTime')?.hasError('required')">
+        Date Time is requeird
+      </mat-error>
+    </mat-form-field>
+
+
+    <div class="form-group">
+      <label for="timePicker">Select Time:</label>
+      <input
+        matInput
+        [ngxTimepicker]="timePicker"
+        formControlName="timePicker"
+        placeholder="HH:MM AM/PM"
+      />
+      <ngx-material-timepicker
+        #timePicker
+        [format]="24"
+        [defaultTime]="reservationForm.controls['timePicker'].value"
+      ></ngx-material-timepicker>
+    </div>
+
+
+    <br>
+
+
+
+     <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Description</mat-label>
+      <textarea matInput type="text" placeholder="Description" formControlName="description"></textarea>
+      <mat-error *ngIf="reservationForm.get('description')?.hasError('required')">
+        Description required
+      </mat-error>
+     </mat-form-field>
+
+     <button mat-raised-button color="primary" type="submit">Submit</button>
+
+
+  </form>
+</div>
