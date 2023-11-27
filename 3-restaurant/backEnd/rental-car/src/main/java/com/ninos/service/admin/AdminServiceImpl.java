@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -12,10 +13,14 @@ import org.springframework.stereotype.Service;
 
 import com.ninos.model.dto.CategoryDTO;
 import com.ninos.model.dto.ProductDTO;
+import com.ninos.model.dto.ReservationDTO;
 import com.ninos.model.entity.Category;
 import com.ninos.model.entity.Product;
+import com.ninos.model.entity.Reservation;
+import com.ninos.model.enums.ReservationStatus;
 import com.ninos.repository.CategoryRepository;
 import com.ninos.repository.ProductRepository;
+import com.ninos.repository.ReservationRepository;
 
 
 @RequiredArgsConstructor
@@ -24,6 +29,7 @@ public class AdminServiceImpl implements AdminService {
 
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final ReservationRepository reservationRepository;
 
 
     @Override
@@ -113,6 +119,32 @@ public class AdminServiceImpl implements AdminService {
     public ProductDTO getProduct(Long productId) {
         Optional<Product> optionalProduct = productRepository.findById(productId);
         return optionalProduct.map(Product::getProductDto).orElse(null);
+    }
+
+
+    @Override
+    public List<ReservationDTO> getAllReservations() {
+        List<Reservation> reservations = reservationRepository.findAll();
+        return reservations.stream().map(Reservation::getREservationDto).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public ReservationDTO changeReservationStatus(Long reservationId, String status) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(reservationId);
+        if(optionalReservation.isPresent()){
+            Reservation existingReservation = optionalReservation.get();
+            if(Objects.equals(status,"Approve")){
+                existingReservation.setReservationStatus(ReservationStatus.APPROVED);
+            }else{
+                existingReservation.setReservationStatus(ReservationStatus.DISAPPROVED);
+            }
+            Reservation updatedReservation = reservationRepository.save(existingReservation);
+            ReservationDTO updatedReservationDto = new ReservationDTO();
+            updatedReservationDto.setId(updatedReservation.getId());
+            return updatedReservationDto;
+        }
+        return null;
     }
 
 

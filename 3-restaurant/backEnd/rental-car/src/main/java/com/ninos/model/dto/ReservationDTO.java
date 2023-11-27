@@ -25,4 +25,6 @@ public class ReservationDTO {
 
     private Long customerId;
 
+    private String customerName;
+
 }

@@ -79,11 +79,28 @@ export class AdminService {
 
 
 
+  getAllReservations():Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/reservations`, {
+      headers:this.createAuthorizationHeader()
+    })
+  }
+
+
+  changeReservationStatus(reservationId:number, status:string):Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/reservation/${reservationId}/${status}`,{
+      headers:this.createAuthorizationHeader()
+    })
+  }
+
+
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(
      'Authorization', 'Bearer ' + StorageService.getToken()
     )
   }
+
+
 
 
 

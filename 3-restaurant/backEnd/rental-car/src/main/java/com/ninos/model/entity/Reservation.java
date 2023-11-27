@@ -55,6 +55,7 @@ public class Reservation {
       reservationDTO.setDateTime(dateTime);
       reservationDTO.setTimePicker(timePicker);
       reservationDTO.setCustomerId(user.getId());
+      reservationDTO.setCustomerName(user.getName());
       return reservationDTO;
     }
 

@@ -5,13 +5,15 @@ import { AddCategoryComponent } from './components/add-category/add-category.com
 import { PostProductComponent } from './components/post-product/post-product.component';
 import { ViewProductsComponent } from './components/view-products/view-products.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
+import { GetAllReservationsComponent } from './components/get-all-reservations/get-all-reservations.component';
 
 const routes: Routes = [
   {path:'dashboard', component:AdminDashboardComponent},
   {path:'category', component:AddCategoryComponent},
   {path:':categoryId/product', component:PostProductComponent},
   {path:':categoryId/products', component:ViewProductsComponent},
-  {path:'edit_product/:productId', component:UpdateProductComponent}
+  {path:'edit_product/:productId', component:UpdateProductComponent},
+  {path:'reservations',component:GetAllReservationsComponent}
 ];
 
 @NgModule({

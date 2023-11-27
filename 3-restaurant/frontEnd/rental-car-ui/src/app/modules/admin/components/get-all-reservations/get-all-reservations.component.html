@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="row">
+     <table class="table table-striped">
+       <thead>
+         <tr>
+           <th>Customer Name</th>
+           <th>Table Type</th>
+           <th>Description</th>
+           <th>Reservation Date</th>
+           <th>Reservation Time</th>
+           <th>Status</th>
+           <th>Action</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr *ngFor="let temp of reservations">
+           <td>{{temp.customerName}}</td>
+           <td>{{temp.tableType}}</td>
+           <td>{{temp.description}}</td>
+           <td>{{temp.dateTime | date}}</td>
+           <td>{{temp.timePicker}}</td>
+           <td>
+             <strong
+               [ngStyle]="{'color': temp.reservationStatus === 'APPROVED' ? 'green': temp.reservationStatus === 'DISAPPROVED'? 'blue' : 'red'}">
+               {{temp.reservationStatus}}
+             </strong>
+           </td>
+           <td>
+             <span *ngIf="temp.reservationStatus === 'PENDING'">
+              <button class="btn btn-success" (click)="changeReservationStatus(temp.id, 'Approve')">Approve</button>
+              <button class="btn btn-danger" (click)="changeReservationStatus(temp.id, 'disapprove')">Disapprove</button>
+             </span>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+  </div>
+</div>

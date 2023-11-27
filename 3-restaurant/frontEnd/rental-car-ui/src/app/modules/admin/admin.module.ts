@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostProductComponent } from './components/post-product/post-product.component';
 import { ViewProductsComponent } from './components/view-products/view-products.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
+import { GetAllReservationsComponent } from './components/get-all-reservations/get-all-reservations.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UpdateProductComponent } from './components/update-product/update-produ
     AddCategoryComponent,
     PostProductComponent,
     ViewProductsComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    GetAllReservationsComponent
   ],
   imports: [
     CommonModule,

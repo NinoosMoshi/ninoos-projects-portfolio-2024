@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ninos.model.dto.CategoryDTO;
 import com.ninos.model.dto.ProductDTO;
+import com.ninos.model.dto.ReservationDTO;
 
 public interface AdminService {
 
@@ -27,5 +28,8 @@ public interface AdminService {
 
     ProductDTO getProduct(Long productId);
 
+    List<ReservationDTO> getAllReservations();
+
+    ReservationDTO changeReservationStatus(Long reservationId, String status);
 }
 

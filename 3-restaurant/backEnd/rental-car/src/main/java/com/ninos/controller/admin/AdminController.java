@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ninos.model.dto.CategoryDTO;
 import com.ninos.model.dto.ProductDTO;
+import com.ninos.model.dto.ReservationDTO;
 import com.ninos.service.admin.AdminService;
 
 @RequiredArgsConstructor
@@ -99,6 +100,22 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong");
         }
             return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
+    }
+
+
+    @GetMapping("/reservations")
+    public ResponseEntity<List<ReservationDTO>> getReservationsByUser(){
+        List<ReservationDTO> reservationDTOList = adminService.getAllReservations();
+        if(reservationDTOList == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(reservationDTOList);
+    }
+
+
+    @GetMapping("/reservation/{reservationId}/{status}")
+    public ResponseEntity<ReservationDTO> changeReservationStatus(@PathVariable Long reservationId, @PathVariable String status){
+        ReservationDTO updatedReservationStatus = adminService.changeReservationStatus(reservationId, status);
+        if(updatedReservationStatus == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(updatedReservationStatus);
     }
 
 
