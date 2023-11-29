@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,33 +11,42 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class ResetPasswordComponent {
 
+  isSpinning:boolean = false;
   emailForm!: FormGroup;
   resetForm!: FormGroup;
-  hidePassword:boolean = true;
+
   enableFrom: boolean = true;
 
 
   constructor(private fb: FormBuilder,
     private authService:AuthService,
-    private router: Router){}
+    private router: Router,
+    private message: NzMessageService){}
 
 
   ngOnInit(): void{
     this.emailForm = this.fb.group({
-        email:[null, [Validators.required]],
+        email:[null, [Validators.required, Validators.email]],
         })
 
     this.resetForm = this.fb.group({
         code:[null, [Validators.required]],
         password:[null, [Validators.required]],
-        confirmPassword:[null, [Validators.required]]
+        checkPassword:[null, [Validators.required, this.confirmationValidate]]
         })
   }
 
 
-  togglePasswordVisibility(){
-    this.hidePassword = !this.hidePassword;
+  confirmationValidate = (control:FormControl):{ [s:string]: boolean } =>{
+    if(!control.value) {
+      return {require:true};
     }
+    else if(control.value !== this.resetForm.controls['password'].value){
+      return { confirm:true, error:true};
+    }
+    return {};
+  }
+
 
 
   onSubmitEmail(){
@@ -49,7 +59,7 @@ export class ResetPasswordComponent {
         }
       },
       error:err =>{
-        alert("Email is not Exists")
+        this.message.error("Email is not Exists.", {nzDuration: 5000})
       }
      })
 
@@ -63,10 +73,10 @@ export class ResetPasswordComponent {
     const email = this.emailForm.get('email')?.value;
     const code = this.resetForm.get('code')?.value;
     const password = this.resetForm.get('password')?.value;
-    const confirmPassword = this.resetForm.get('confirmPassword')?.value;
+    const checkPassword = this.resetForm.get('checkPassword')?.value;
 
-    if(password !== confirmPassword){
-      alert('Passwords do not match.')
+    if(password !== checkPassword){
+      this.message.error("Passwords do not matched.", {nzDuration: 5000})
       return;
     }
 
@@ -78,7 +88,7 @@ export class ResetPasswordComponent {
         }
       },
       error:err =>{
-        alert("Invalid Code")
+        this.message.error("Invalid Code.", {nzDuration: 5000})
       }
     })
 

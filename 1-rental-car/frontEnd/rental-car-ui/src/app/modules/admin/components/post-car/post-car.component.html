@@ -1,0 +1,106 @@
+<!-- <div class="container">
+  <h2>Add Category</h2>
+
+  <form [formGroup]="carForm" (ngSubmit)="postCar()">
+
+      <div class="file-upload-container">
+        <label class="file-upload-label">
+          <span>Select a File</span>
+          <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden>
+          <mat-icon>attach_file</mat-icon>
+        </label>
+
+        <div *ngIf="selectedFile" class="image-preview">
+           <div class="circle-image">
+            <img [src]="imagePreview" alt="Selected Image" class="preview-image">
+           </div>
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Select a Brand Name</mat-label>
+        <mat-select formControlName="brand" name="brand">
+          <mat-option *ngFor="let tempBrand of listOfBrands" [value]="tempBrand">
+             {{tempBrand}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="carForm.get('brand')?.hasError('required')">
+           Brand Name is required
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="form-field">
+         <mat-label>Name</mat-label>
+         <input matInput type="text" placeholder="Name" formControlName="name" />
+         <mat-error *ngIf="carForm.get('name')?.hasError('required')">
+           Name is required
+         </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Select a Type</mat-label>
+        <mat-select formControlName="type" name="type">
+          <mat-option *ngFor="let tempType of listOfType" [value]="tempType">
+             {{tempType}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="carForm.get('type')?.hasError('required')">
+           Type is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Select a Transmission</mat-label>
+        <mat-select formControlName="transmission" name="transmission">
+          <mat-option *ngFor="let tempTransmission of listOfTransmission" [value]="tempTransmission">
+             {{tempTransmission}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="carForm.get('transmission')?.hasError('required')">
+          Transmission is required
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Select a Color</mat-label>
+        <mat-select formControlName="color" name="color">
+          <mat-option *ngFor="let tempColor of listOfTransmission" [value]="tempColor">
+             {{tempColor}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="carForm.get('color')?.hasError('required')">
+          Transmission is required
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Month and Year</mat-label>
+        <input matInput [matDatepicker]="dp" formControlName="date">
+        <mat-hint>MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp
+                        startView="multi-year"
+                        panelClass="example-month-picker">
+        </mat-datepicker>
+      </mat-form-field>
+
+
+
+
+     <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Description</mat-label>
+      <textarea matInput type="text" placeholder="Description" formControlName="description"></textarea>
+      <mat-error *ngIf="carForm.get('description')?.hasError('required')">
+        Description required
+      </mat-error>
+     </mat-form-field>
+
+     <button mat-raised-button color="primary" type="submit">Post Car</button>
+
+
+  </form>
+</div> -->

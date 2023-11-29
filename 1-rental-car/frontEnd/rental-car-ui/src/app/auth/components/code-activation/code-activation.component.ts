@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-code-activation',
@@ -11,15 +12,16 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class CodeActivationComponent {
 
+  isSpinning:boolean = false;
   codeForm!: FormGroup;
-  hidePassword:boolean = true;
 
   email:string = '';
 
 
   constructor(private fb: FormBuilder,
     private authService:AuthService,
-    private router: Router){}
+    private router: Router,
+    private message: NzMessageService){}
 
 
   ngOnInit(): void{
@@ -38,12 +40,13 @@ export class CodeActivationComponent {
         next:res =>{
           if(res.result == 1){
             this.router.navigateByUrl("/login");
+            this.message.success("Activation Successful", {nzDuration: 5000})
           }else{
-            alert("Invalid Code")
+            this.message.error("Invalid Code", {nzDuration: 5000})
           }
         },
         error:err =>{
-
+          this.message.error("There is some error", {nzDuration: 5000})
         }
       })
 

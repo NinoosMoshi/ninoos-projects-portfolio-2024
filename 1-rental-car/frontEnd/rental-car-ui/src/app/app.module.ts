@@ -6,11 +6,18 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { DemoAngularMaterialModules } from './DemoAngularMaterialModules';
 import { LoginComponent } from './auth/components/login/login.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
 import { CodeActivationComponent } from './auth/components/code-activation/code-activation.component';
 import { ResetPasswordComponent } from './auth/components/reset-password/reset-password.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { DemoAngularZorroModules } from './DemoAngularZorroModules';
+
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -27,9 +34,11 @@ import { ResetPasswordComponent } from './auth/components/reset-password/reset-p
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DemoAngularMaterialModules
+    DemoAngularZorroModules
   ],
-  providers: [],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

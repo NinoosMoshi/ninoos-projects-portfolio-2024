@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-signup',
@@ -10,55 +11,56 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class SignupComponent {
 
+  isSpinning:boolean = false;
   signupForm!: FormGroup;
-  hidePassword:boolean = true;
+
 
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router){}
+    private router: Router,
+    private message: NzMessageService){}
 
 
 ngOnInit(): void{
   this.signupForm = this.fb.group({
       name:[null, [Validators.required]],
-      email:[null, [Validators.required]],
+      email:[null, [Validators.required, Validators.email]],
       password:[null, [Validators.required]],
-      confirmPassword:[null, [Validators.required]]
+      checkPassword:[null, [Validators.required, this.confirmationValidate]]
       })
 }
 
+confirmationValidate = (control:FormControl):{ [s:string]: boolean } =>{
+  if(!control.value) {
+    return {require:true};
+  }
+  else if(control.value !== this.signupForm.controls['password'].value){
+    return { confirm:true, error:true};
+  }
+  return {};
+}
 
-  togglePasswordVisibility(){
-    this.hidePassword = !this.hidePassword;
-    }
 
-
-    onSubmit(){
+    register(){
       const email = this.signupForm.get('email')?.value;
-      const password = this.signupForm.get('password')?.value;
-      const confirmPassword = this.signupForm.get('confirmPassword')?.value;
-
-      if(password !== confirmPassword){
-        alert('Passwords do not match.')
-        return;
-      }
-
       this.authService.register(this.signupForm.value).subscribe({
         next:res =>{
           if(res.result == 1){
             sessionStorage.setItem("emailAtive",email);
-            alert('Sign up successful!.')
+            this.message.success("Signup successful", {nzDuration: 5000})
             this.router.navigateByUrl("/active-code")
           }else{
-            alert("email is exists")
+            this.message.error("Email Is Exists", {nzDuration: 5000})
           }
 
         },
         error:err =>{
-          alert('Sign up faild. Please try again.')
+          this.message.error("Sign up faild. Please try again.", {nzDuration: 5000})
         }
       })
+
+
 
     }
 
