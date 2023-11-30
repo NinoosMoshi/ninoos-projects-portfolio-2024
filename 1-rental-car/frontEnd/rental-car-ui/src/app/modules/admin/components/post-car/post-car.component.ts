@@ -11,6 +11,7 @@ import { AdminService } from '../../services/admin.service';
 })
 export class PostCarComponent {
 
+  isSpinning:boolean = false;
   carForm!:FormGroup;
   selectedFile: File | null;
   imagePreview: string | ArrayBuffer | null;
@@ -32,6 +33,7 @@ export class PostCarComponent {
         transmission:[null, Validators.required],
         color:[null, Validators.required],
         date:[null, Validators.required],
+        price:[null, Validators.required],
         description:[null, Validators.required]
       })
   }
@@ -41,12 +43,19 @@ export class PostCarComponent {
 
   postCar(): void{
     if(this.carForm.valid){
+      console.log(this.carForm.value)
       const formData:FormData = new FormData();
       formData.append('img', this.selectedFile);
+      formData.append('brand', this.carForm.get('brand').value);
       formData.append('name', this.carForm.get('name').value);
+      formData.append('type', this.carForm.get('type').value);
+      formData.append('transmission', this.carForm.get('transmission').value);
+      formData.append('color', this.carForm.get('color').value);
+      formData.append('date', this.carForm.get('date').value);
+      formData.append('price', this.carForm.get('price').value);
       formData.append('description', this.carForm.get('description').value);
 
-
+      console.log(formData)
 
     }
     else{

@@ -1,83 +1,53 @@
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+.parent {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.container h2 {
+
+.child {
+  padding: 50px;
+  width: 100%;
+  max-width: 680px;
+  background-color: white;
+  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.imgDiv {
+  width: 100%;
   text-align: center;
   margin-bottom: 20px;
-  color: #3f51b5;
 }
 
-.container form {
-  display: flex;
-  flex-direction: column;
+
+.profile-badge {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 
-.container form .file-upload-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.image-preview {
-  display: flex;
-  justify-content: center;
-  margin-top: 16px;
-}
-
-.image-preview .circle-image {
-   width: 150px;
-   height: 150px;
-   border-radius: 100%;
-   overflow: hidden;
-   position: relative;
-   background-color: lightgrey;
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.preview-image {
-  width: 100%;
-  height: 100%;
+.profile {
+  height: 180px;
+  width: 180px;
+  margin-bottom: 5px;
   object-fit: cover;
+  border-radius: 50%;
 }
 
-.file-upload-container .file-upload-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 14px;
-  background-color: #3f51b5;
-  color: white;
+.upload-label {
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s;
 }
 
-.file-upload-container .file-upload-label span {
-  margin-right: 8px;
+.upload-icon {
+  width: 70px;
+  height: 35px;
+  margin-top: 10px;
 }
 
-.file-upload-container .file-upload-label mat-icon {
-  font-size: 20px;
-}
-
-form button {
-  align-self: center;
-  margin-top: 16px;
-}
-
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
-  }
-
-  form {
-    mat-form-field {
-      margin-bottom: 10px;
-    }
-  }
-
+.login-form-button {
+  margin-top: 20px;
+  width: 100%;
 }
