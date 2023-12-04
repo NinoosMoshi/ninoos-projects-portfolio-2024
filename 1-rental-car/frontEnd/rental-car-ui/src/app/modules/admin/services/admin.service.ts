@@ -20,6 +20,13 @@ export class AdminService {
   }
 
 
+  getAllCars():Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/cars`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+
 
 
   private createAuthorizationHeader(): HttpHeaders {

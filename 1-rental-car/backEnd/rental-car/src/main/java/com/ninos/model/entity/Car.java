@@ -12,6 +12,8 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.ninos.model.dto.CarDTO;
+
 @Data
 @Entity
 @Table(name = "cars")
@@ -37,6 +39,20 @@ public class Car {
     private byte[] image;
 
 
+    public CarDTO getCarDto(){
+        CarDTO carDTO = new CarDTO();
+        carDTO.setId(id);
+        carDTO.setName(name);
+        carDTO.setBrand(brand);
+        carDTO.setColor(color);
+        carDTO.setPrice(price);
+        carDTO.setDescription(description);
+        carDTO.setType(type);
+        carDTO.setTransmission(transmission);
+        carDTO.setDate(date);
+        carDTO.setReturnImage(image);
+        return carDTO;
+    }
 
 
 }

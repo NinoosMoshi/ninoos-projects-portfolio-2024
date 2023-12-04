@@ -3,6 +3,8 @@ package com.ninos.service.admin;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,11 @@ public class AdminServiceImpl implements AdminService{
         }
     }
 
+    @Override
+    public List<CarDTO> getAllCars() {
+        List<Car> cars = carRepository.findAll();
+        return cars.stream().map(Car::getCarDto).collect(Collectors.toList());
+    }
 
 
 }
