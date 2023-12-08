@@ -20,6 +20,17 @@
           Transmission : <b>{{ cars.transmission }}</b> - Type :
           <b>{{ car.type }}</b> - Year : <b>{{ car.date | date : "yyyy" }}</b>
         </h5>
+        <hr />
+
+        <div style="float: right;">
+          <button style="margin-left: 10px;"
+          nzSize="small"
+          nz-button
+          nzType="primary"
+          nzDanger
+          (click)="deleteCar(car.id)">Delete</button>
+        </div>
+
       </div>
     </div>
   </div>

@@ -27,6 +27,13 @@ export class AdminService {
   }
 
 
+  deleteCar(id:number):Observable<any>{
+    return this.http.delete(`${this.BASIC_URL}/car/${id}`, {
+      headers:this.createAuthorizationHeader()
+    })
+  }
+
+
 
 
   private createAuthorizationHeader(): HttpHeaders {
@@ -36,6 +43,7 @@ export class AdminService {
       'Bearer ' + StorageService.getToken()
     );
   }
+
 
 
 

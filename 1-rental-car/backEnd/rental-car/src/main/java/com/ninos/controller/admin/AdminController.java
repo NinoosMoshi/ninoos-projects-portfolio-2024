@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,15 +38,17 @@ public class AdminController {
     }
 
 
-//    @GetMapping("/cars")
-//    public ResponseEntity<?> getAllCars(){
-//        return ResponseEntity.ok(adminService.getAllCars());
-//    }
-
     @GetMapping("/cars")
     public ResponseEntity<List<CarDTO>> getAllCategories(){
         List<CarDTO> allCars = adminService.getAllCars();
         return ResponseEntity.ok(allCars);
+    }
+
+
+    @DeleteMapping("/car/{id}")
+    public ResponseEntity<Void> deleteCar(@PathVariable Long id){
+        adminService.deleteCar(id);
+        return ResponseEntity.ok(null);
     }
 
 
