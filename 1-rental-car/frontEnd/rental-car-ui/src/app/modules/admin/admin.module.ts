@@ -7,12 +7,14 @@ import { PostCarComponent } from './components/post-car/post-car.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoAngularZorroModules } from 'src/app/DemoAngularZorroModules';
+import { UpdateCarComponent } from './components/update-car/update-car.component';
 
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
-    PostCarComponent
+    PostCarComponent,
+    UpdateCarComponent
   ],
   imports: [
     CommonModule,

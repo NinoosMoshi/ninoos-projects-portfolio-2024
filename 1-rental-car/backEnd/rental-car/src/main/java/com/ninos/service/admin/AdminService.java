@@ -13,6 +13,8 @@ public interface AdminService {
 
     void deleteCar(Long id);
 
+    CarDTO getCarById(Long id);
+
 
 
 }

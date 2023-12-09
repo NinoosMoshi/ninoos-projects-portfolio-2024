@@ -52,6 +52,13 @@ public class AdminController {
     }
 
 
+    @GetMapping("/car/{id}")
+    public ResponseEntity<CarDTO> getCarById(@PathVariable Long id){
+        CarDTO carDTO = adminService.getCarById(id);
+        return ResponseEntity.ok(carDTO);
+    }
+
+
 
 
 }
