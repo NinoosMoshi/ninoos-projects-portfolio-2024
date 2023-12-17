@@ -36,7 +36,7 @@ export class PostCarComponent {
         type:[null, Validators.required],
         transmission:[null, Validators.required],
         color:[null, Validators.required],
-        date:[null, Validators.required],
+        year:[null, Validators.required],
         price:[null, Validators.required],
         description:[null, Validators.required]
       })

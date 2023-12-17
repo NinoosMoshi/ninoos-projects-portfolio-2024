@@ -28,7 +28,7 @@ public class Car {
     private String type;
     private String transmission;
     private String color;
-    private Date date;
+    private Date year;
     private BigDecimal price;
 
     @Lob
@@ -49,7 +49,7 @@ public class Car {
         carDTO.setDescription(description);
         carDTO.setType(type);
         carDTO.setTransmission(transmission);
-        carDTO.setDate(date);
+        carDTO.setYear(year);
         carDTO.setReturnImage(image);
         return carDTO;
     }

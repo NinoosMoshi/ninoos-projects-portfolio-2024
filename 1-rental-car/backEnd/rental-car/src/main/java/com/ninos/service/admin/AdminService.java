@@ -15,6 +15,10 @@ public interface AdminService {
 
     CarDTO getCarById(Long id);
 
+    boolean updateCar(Long carId, CarDTO carDTO) throws IOException;
+
+
+
 
 
 }

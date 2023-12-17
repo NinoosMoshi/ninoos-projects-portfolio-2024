@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,6 +58,22 @@ public class AdminController {
         CarDTO carDTO = adminService.getCarById(id);
         return ResponseEntity.ok(carDTO);
     }
+
+
+    @PutMapping("/car/{carId}")
+    public ResponseEntity<Void> updateCar(@PathVariable Long carId, @ModelAttribute CarDTO carDTO) throws IOException{
+        try {
+            boolean success = adminService.updateCar(carId,carDTO);
+            if(success) return ResponseEntity.status(HttpStatus.OK).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+
+
 
 
 
