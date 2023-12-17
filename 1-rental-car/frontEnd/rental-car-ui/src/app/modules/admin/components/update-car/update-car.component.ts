@@ -71,7 +71,7 @@ getCarById(){
 
 
 updateCar(){
-    // this.isSpinning = true;
+    this.isSpinning = true;
     const formData:FormData = new FormData();
     if(this.imgChanged && this.selectedFile){
        formData.append('image', this.selectedFile)
@@ -89,7 +89,7 @@ updateCar(){
 
     this.adminService.updateCar(this.carId,formData).subscribe({
       next:res =>{
-        // this.isSpinning = false;
+        this.isSpinning = false;
         this.message.success("Update Car successfully", {nzDuration:5000})
         this.router.navigateByUrl("/admin/dashboard")
         console.log(res)
