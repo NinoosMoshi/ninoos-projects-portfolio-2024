@@ -41,11 +41,7 @@ export class AdminService {
   }
 
 
-  // updateCar(carId:number, carDTO:any):Observable<any>{
-  //   return this.http.put(`${this.BASIC_URL}/car/${carId}`, carDTO, {
-  //     headers: this.createAuthorizationHeader()
-  //   })
-  // }
+
 
   updateCar(carId:number, carDTO:any):Observable<any>{
     return this.http.put(`${this.BASIC_URL}/car/${carId}`, carDTO, {
