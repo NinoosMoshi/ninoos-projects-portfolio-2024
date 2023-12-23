@@ -29,7 +29,7 @@ public class Car {
     private String transmission;
     private String color;
     private Date year;
-    private BigDecimal price;
+    private Long price;
 
     @Lob
     private String description;

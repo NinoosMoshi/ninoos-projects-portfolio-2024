@@ -19,6 +19,12 @@ export class CustomerService {
     })
   }
 
+  getCarById(carId:number):Observable<any>{
+    return this.http.get<any>(`${this.BASIC_URL}/car/${carId}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
 
 
 

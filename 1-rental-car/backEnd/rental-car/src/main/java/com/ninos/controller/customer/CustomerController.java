@@ -7,9 +7,13 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ninos.model.dto.BookCarDTO;
 import com.ninos.model.dto.CarDTO;
 import com.ninos.service.customer.CustomerService;
 
@@ -24,6 +28,22 @@ public class CustomerController {
     public ResponseEntity<List<CarDTO>> getAllCars(){
         List<CarDTO> cars = customerService.getAllCars();
         return new ResponseEntity<>(cars, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/car/book")
+    public ResponseEntity<Void> bookCar(@RequestBody BookCarDTO bookCarDTO){
+        boolean success = customerService.bookCar(bookCarDTO);
+        if(success) return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+
+    @GetMapping("/car/{carId}")
+    public ResponseEntity<CarDTO> getCarById(@PathVariable Long carId){
+        CarDTO carDTO = customerService.getCarById(carId);
+        if (carDTO == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(carDTO);
     }
 
 
