@@ -8,8 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -17,11 +18,13 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ninos.model.dto.BookCarDTO;
 import com.ninos.model.enums.BookCarStatus;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class BookCar {
 
@@ -51,6 +54,20 @@ public class BookCar {
     private Car car;
 
 
+    public BookCarDTO getBookCatDto(){
+        BookCarDTO bookCarDTO = new BookCarDTO();
+        bookCarDTO.setId(id);
+        bookCarDTO.setDays(days);
+        bookCarDTO.setBookCarStatus(bookCarStatus);
+        bookCarDTO.setPrice(price);
+        bookCarDTO.setToDate(toDate);
+        bookCarDTO.setFromDate(fromDate);
+        bookCarDTO.setEmail(user.getEmail());
+        bookCarDTO.setUsername(user.getName());
+        bookCarDTO.setUserId(user.getId());
+        bookCarDTO.setCarId(car.getId());
+        return bookCarDTO;
+    }
 
 
 

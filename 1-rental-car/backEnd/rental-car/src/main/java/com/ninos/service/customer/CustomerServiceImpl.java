@@ -34,9 +34,42 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
 
+
+//    @Override
+//    public boolean bookCar(BookCarDTO bookCarDTO) {
+//        Optional<Car> optionalCar = carRepository.findById(bookCarDTO.getCarId());
+//        Optional<User> optionalUser = userRepository.findById(bookCarDTO.getUserId());
+//
+//        if(optionalCar.isPresent() && optionalUser.isPresent()){
+//            Car existingCar = optionalCar.get();
+//            BookCar bookCar = new BookCar();
+//            bookCar.setUser(optionalUser.get());
+//            bookCar.setCar(existingCar);
+//            bookCar.setBookCarStatus(BookCarStatus.PENDING);
+//
+////            bookCar.setFromDate(bookCarDTO.getFromDate());
+////            bookCar.setToDate(bookCarDTO.getToDate());
+//
+//            long diffInMilliSeconds = bookCarDTO.getToDate().getTime() - bookCarDTO.getFromDate().getTime();
+//            long days = TimeUnit.MILLISECONDS.toDays(diffInMilliSeconds);
+//
+//            bookCar.setDays(days);
+//            bookCar.setPrice(existingCar.getPrice() * days);
+//            bookCarRepository.save(bookCar);
+//
+//            return true;
+//        }
+//
+//        return false;
+//    }
+
     @Override
-    public boolean bookCar(BookCarDTO bookCarDTO) {
-        Optional<Car> optionalCar = carRepository.findById(bookCarDTO.getCarId());
+    public boolean bookCar(Long carId, BookCarDTO bookCarDTO) {
+        User  user = null;
+        Car car = null;
+
+//        Optional<Car> optionalCar = carRepository.findById(bookCarDTO.getCarId());
+        Optional<Car> optionalCar = carRepository.findById(carId);
         Optional<User> optionalUser = userRepository.findById(bookCarDTO.getUserId());
 
         if(optionalCar.isPresent() && optionalUser.isPresent()){
@@ -46,17 +79,29 @@ public class CustomerServiceImpl implements CustomerService{
             bookCar.setCar(existingCar);
             bookCar.setBookCarStatus(BookCarStatus.PENDING);
 
+            bookCar.setFromDate(bookCarDTO.getFromDate());
+            bookCar.setToDate(bookCarDTO.getToDate());
+
             long diffInMilliSeconds = bookCarDTO.getToDate().getTime() - bookCarDTO.getFromDate().getTime();
-            long days = TimeUnit.MICROSECONDS.toDays(diffInMilliSeconds);
+            long days = TimeUnit.MILLISECONDS.toDays(diffInMilliSeconds);
 
             bookCar.setDays(days);
             bookCar.setPrice(existingCar.getPrice() * days);
             bookCarRepository.save(bookCar);
+
             return true;
         }
-
+        else{
         return false;
+        }
+
+
     }
+
+
+
+
+
 
     @Override
     public CarDTO getCarById(long carId) {
@@ -67,6 +112,12 @@ public class CustomerServiceImpl implements CustomerService{
         }else{
             return null;
         }
+    }
+
+
+    @Override
+    public List<BookCarDTO> getBookingsByUserId(Long userId) {
+        return bookCarRepository.findAllByUserId(userId).stream().map(BookCar::getBookCatDto).collect(Collectors.toList());
     }
 
 

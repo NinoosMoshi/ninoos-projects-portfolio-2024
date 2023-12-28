@@ -37,7 +37,7 @@ export class StorageService {
      if(user == null){
        return '';
      }
-     return user.userId;
+     return user.id;
   }
 
 
