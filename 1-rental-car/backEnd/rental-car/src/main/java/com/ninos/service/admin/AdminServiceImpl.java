@@ -9,8 +9,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.ninos.model.dto.BookCarDTO;
 import com.ninos.model.dto.CarDTO;
+import com.ninos.model.entity.BookCar;
 import com.ninos.model.entity.Car;
+import com.ninos.repository.BookCarRepository;
 import com.ninos.repository.CarRepository;
 
 @RequiredArgsConstructor
@@ -18,6 +21,7 @@ import com.ninos.repository.CarRepository;
 public class AdminServiceImpl implements AdminService{
 
     private final CarRepository carRepository;
+    private final BookCarRepository bookCarRepository;
 
 
     @Override
@@ -85,7 +89,11 @@ public class AdminServiceImpl implements AdminService{
     }
 
 
-
+    @Override
+    public List<BookCarDTO> getBookings() {
+        List<BookCar> cars = bookCarRepository.findAll();
+        return cars.stream().map(BookCar::getBookCatDto).collect(Collectors.toList());
+    }
 
 
 }

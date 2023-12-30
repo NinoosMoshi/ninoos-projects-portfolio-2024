@@ -50,6 +50,11 @@ export class AdminService {
   }
 
 
+  getBookings():Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/car/bookings`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
 
 
 

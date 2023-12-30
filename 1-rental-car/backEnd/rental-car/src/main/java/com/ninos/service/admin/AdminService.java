@@ -3,6 +3,7 @@ package com.ninos.service.admin;
 import java.io.IOException;
 import java.util.List;
 
+import com.ninos.model.dto.BookCarDTO;
 import com.ninos.model.dto.CarDTO;
 
 public interface AdminService {
@@ -17,7 +18,7 @@ public interface AdminService {
 
     boolean updateCar(Long carId, CarDTO carDTO) throws IOException;
 
-
+    List<BookCarDTO> getBookings();
 
 
 
