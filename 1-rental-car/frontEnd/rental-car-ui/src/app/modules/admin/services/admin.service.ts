@@ -59,6 +59,17 @@ export class AdminService {
 
 
 
+
+  changeBookingStatus(bookingId:number, status:string):Observable<any>{
+    return this.http.get(`${this.BASIC_URL}/car/booking/${bookingId}/${status}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+
+
+
+
   private createAuthorizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();
     return authHeaders.set(

@@ -20,6 +20,7 @@ public interface AdminService {
 
     List<BookCarDTO> getBookings();
 
+    boolean changeBookingStatus(Long bookingId, String status);
 
 
 }
