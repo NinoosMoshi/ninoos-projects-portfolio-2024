@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ninos.model.dto.BookCarDTO;
 import com.ninos.model.dto.CarDTO;
+import com.ninos.model.dto.SearchCarDTO;
 import com.ninos.service.admin.AdminService;
 
 @RestController
@@ -89,6 +91,10 @@ public class AdminController {
      }
 
 
+     @PostMapping("/car/search")
+     public ResponseEntity<?> searchCar(@RequestBody SearchCarDTO searchCarDTO){
+        return ResponseEntity.ok(adminService.searchCar(searchCarDTO));
+     }
 
 
 }

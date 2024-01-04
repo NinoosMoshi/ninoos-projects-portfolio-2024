@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.ninos.model.dto.BookCarDTO;
 import com.ninos.model.dto.CarDTO;
+import com.ninos.model.dto.CarDtoListDTO;
+import com.ninos.model.dto.SearchCarDTO;
 
 public interface AdminService {
 
@@ -21,6 +23,8 @@ public interface AdminService {
     List<BookCarDTO> getBookings();
 
     boolean changeBookingStatus(Long bookingId, String status);
+
+    CarDtoListDTO searchCar(SearchCarDTO searchCarDTO);
 
 
 }
