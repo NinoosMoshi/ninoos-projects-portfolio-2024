@@ -46,6 +46,13 @@ export class CustomerService {
   }
 
 
+  searchCar(searchCarDTO:any):Observable<any>{
+    return this.http.post(`${this.BASIC_URL}/car/search`, searchCarDTO, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+
 
 
 

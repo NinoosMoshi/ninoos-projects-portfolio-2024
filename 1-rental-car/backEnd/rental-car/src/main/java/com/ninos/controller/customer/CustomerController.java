@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ninos.model.dto.BookCarDTO;
 import com.ninos.model.dto.CarDTO;
+import com.ninos.model.dto.SearchCarDTO;
 import com.ninos.service.customer.CustomerService;
 
 @RestController
@@ -57,6 +58,12 @@ public class CustomerController {
     @GetMapping("/car/bookings/{userId}")
     public ResponseEntity<List<BookCarDTO>> getBookingsByUserId(@PathVariable Long userId){
         return ResponseEntity.ok(customerService.getBookingsByUserId(userId));
+    }
+
+
+    @PostMapping("/car/search")
+    public ResponseEntity<?> searchCar(@RequestBody SearchCarDTO searchCarDTO){
+        return ResponseEntity.ok(customerService.searchCar(searchCarDTO));
     }
 
 

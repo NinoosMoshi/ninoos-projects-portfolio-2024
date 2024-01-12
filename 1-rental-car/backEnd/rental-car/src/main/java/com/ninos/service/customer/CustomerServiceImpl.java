@@ -7,10 +7,14 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.ninos.model.dto.BookCarDTO;
 import com.ninos.model.dto.CarDTO;
+import com.ninos.model.dto.CarDtoListDTO;
+import com.ninos.model.dto.SearchCarDTO;
 import com.ninos.model.entity.BookCar;
 import com.ninos.model.entity.Car;
 import com.ninos.model.entity.User;
@@ -118,6 +122,29 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public List<BookCarDTO> getBookingsByUserId(Long userId) {
         return bookCarRepository.findAllByUserId(userId).stream().map(BookCar::getBookCatDto).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public CarDtoListDTO searchCar(SearchCarDTO searchCarDTO) {
+        Car car = new Car();
+        car.setBrand(searchCarDTO.getBrand());
+        car.setType(searchCarDTO.getType());
+        car.setTransmission(searchCarDTO.getTransmission());
+        car.setColor(searchCarDTO.getColor());
+
+        ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll()
+                .withMatcher("brand", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("transmission", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("color", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+
+        Example<Car> carExample = Example.of(car,exampleMatcher);
+        List<Car> carList = carRepository.findAll(carExample);
+        CarDtoListDTO carDtoListDTO = new CarDtoListDTO();
+        carDtoListDTO.setCarDTOList(carList.stream().map(Car::getCarDto).collect(Collectors.toList()));
+
+        return carDtoListDTO;
     }
 
 

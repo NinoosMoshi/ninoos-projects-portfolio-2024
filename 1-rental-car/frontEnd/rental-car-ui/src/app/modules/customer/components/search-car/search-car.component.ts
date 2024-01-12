@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { AdminService } from '../../services/admin.service';
+import { CustomerService } from '../../services/customer.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-search-car',
@@ -19,7 +19,7 @@ export class SearchCarComponent {
   listOfColor = ['Red', 'White', 'Blue', 'Black'];
   listOfTransmission = ['Manual', 'Automatic'];
 
- constructor(private fb:FormBuilder, private adminService:AdminService){}
+ constructor(private fb:FormBuilder, private customerService:CustomerService){}
 
  ngOnInit(){
    this.searchCarForm = this.fb.group({
@@ -33,7 +33,7 @@ export class SearchCarComponent {
 
  searchCar(){
    this.isSpinning = true
-   this.adminService.searchCar(this.searchCarForm.value).subscribe({
+   this.customerService.searchCar(this.searchCarForm.value).subscribe({
     next:res =>{
       console.log(res)
       res.carDTOList.forEach(element => {
@@ -47,7 +47,5 @@ export class SearchCarComponent {
     }
    })
  }
-
-
 
 }
